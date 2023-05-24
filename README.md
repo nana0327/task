@@ -30,6 +30,25 @@
 | __M__ | 메모리 사용량에 따라 정렬 |
 | __T__ | 실행 시간에 따라 정렬 |
 
+* CPU 사용량
+
+| 요소 | 내용 |
+| --: | :-- |
+| us | 프로세스의 유저 영역에서의 CPU 사용률 |
+| sy | 프로세스의 커널 영역에서의 CPU 사용률 |
+| ni | 프로세스의 우선순위(priority) 설정에 사용하는 CPU 사용률 |
+| id | 사용하고 있지 않는 비율 |
+| wa | IO가 완료될때까지 기다리고 있는 CPU 비율 |
+| hi | 하드웨어 인터럽트에 사용되는 CPU 사용률 |
+| us | CPU 사용량에 따라 정렬 |
+| si | 소프트웨어 인터럽트에 사용되는 CPU 사용률 |
+| st | CPU를 VM에서 사용하여 대기하는 CPU 비율 |
+
+* 메모리 사용량
+  * total : 총 메모리 양
+  * free : 사용가능한 메모리 양
+  * used : 사용중인 메모리 양
+
 * 필터링
   * __u__: 특정 사용자의 프로세스만 볼 때 사용
 
@@ -107,13 +126,48 @@
 | Stopped (SIGTTIN) | SIGTTIN 신호가 작업을 일시 중단했음을 의미 |
 | Stopped (SIGTTOU) | SIGTTOU 신호가 작업을 일시 중단했음을 의미 |
 
+
 4.kill
 -------------    
+프로세스에 특정한 signal을 보내는 명령어
 
+1)시그널을 지정하지 않을 경우 기본 값인 정상 종료 시그널을 보냄
 
+    $ kill [pid]
 
+2)시그널 지정
 
+    $ kill -s [signal id] [pid]
+    $ kill -s [signal text] [pid]
+    $ kill -[signal id] [pid]
+    $ kill -[signal text] [pid]
+    
+* 시그널 
 
+| 옵션 | 내용 |
+| --: | :-- |
+| Ctrl+c | 실행중인 프로세스에 SIGINT신호를 보냄(프로세스 종료) |
+| Ctrl+z | 행중인 프로세스에 SIGITSTP신호를 보냄(프로세스 정지) |
+| Ctrl+￦ | 실행중인 프로세스에 SIGINT신호를 보냄(프로세스 종료 + 코어 덤프) |
+
+* 시그널 종류
+---------------------------------------
+ 1) SIGHUP	 2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
+ 6) SIGABRT	 7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
+11) SIGSEGV	12) SIGUSR2	13) SIGPIPE	14) SIGALRM	15) SIGTERM
+16) SIGSTKFLT	17) SIGCHLD	18) SIGCONT	19) SIGSTOP	20) SIGTSTP
+21) SIGTTIN	22) SIGTTOU	23) SIGURG	24) SIGXCPU	25) SIGXFSZ
+26) SIGVTALRM	27) SIGPROF	28) SIGWINCH	29) SIGIO	30) SIGPWR
+31) SIGSYS	34) SIGRTMIN	35) SIGRTMIN+1	36) SIGRTMIN+2	37) SIGRTMIN+3
+38) SIGRTMIN+4	39) SIGRTMIN+5	40) SIGRTMIN+6	41) SIGRTMIN+7	42) SIGRTMIN+8
+43) SIGRTMIN+9	44) SIGRTMIN+10	45) SIGRTMIN+11	46) SIGRTMIN+12	47) SIGRTMIN+13
+48) SIGRTMIN+14	49) SIGRTMIN+15	50) SIGRTMAX-14	51) SIGRTMAX-13	52) SIGRTMAX-12
+53) SIGRTMAX-11	54) SIGRTMAX-10	55) SIGRTMAX-9	56) SIGRTMAX-8	57) SIGRTMAX-7
+58) SIGRTMAX-6	59) SIGRTMAX-5	60) SIGRTMAX-4	61) SIGRTMAX-3	62) SIGRTMAX-2
+63) SIGRTMAX-1	64) SIGRTMAX
+---------------------------------------
+
+_자주 사용하는 시그널 = 1(SIGHUP), 2(SIGINT), 3(SIGQUIT), 9(SIGKILL), 15(SIGTERM), 18(SIGTSTP), 19(SIGCONT), 20(SIGCHLD)_
     
 
 
